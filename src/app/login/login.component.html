@@ -1,0 +1,64 @@
+<div class="flex-column d-flex align-items-center">
+
+    <div class="w-75">
+      <h1 class="mb-3 text-start">Connexion</h1>
+  
+      <form id="createForm" (ngSubmit)="login()" [formGroup]="loginForm">
+        <div class="form-floating mb-3 text-secondary">
+          <input type="text" class="form-control" id="usernameOrEmail"
+                 [class.is-valid]="loginForm.get('usernameOrEmail')?.valid"
+                 [class.is-invalid]="loginForm.get('usernameOrEmail')?.dirty && loginForm.get('usernameOrEmail')?.invalid"
+                 placeholder="Username or Email" formControlName="usernameOrEmail"/>
+          <label for="usernameOrEmail">Username or Email</label>
+          @if (loginForm.get('usernameOrEmail')?.dirty && loginForm.get('usernameOrEmail')?.hasError('required')) {
+            <div class="invalid-feedback">
+              Username or Email is required
+            </div>
+          }
+        </div>
+        <div class="form-floating mb-3 text-secondary">
+          <input type="password" class="form-control" id="passord"
+                 [class.is-valid]="loginForm.get('password')?.valid"
+                 [class.is-invalid]="loginForm.get('password')?.dirty && loginForm.get('password')?.invalid"
+                 placeholder="Password" formControlName="password"/>
+          <label for="password">Password</label>
+          @if (loginForm.get('password')?.dirty && loginForm.get('password')?.hasError('required')) {
+            <div class="invalid-feedback">
+             Password is required
+            </div>
+          }
+        </div>
+        
+       
+        <div class="d-grid">
+          <button class="btn btn-primary" [disabled]="loginForm.invalid || isLogin" type="submit">
+            @if(!isLogin) {
+              <div>Connecter</div> 
+            } @else if(isLogin) {
+              <div class="d-flex align-items-center justify-content-center">
+                <fa-icon icon="circle-notch" class="me-2" animation="spin"></fa-icon>
+                <div>Authentication in progress...</div>
+              </div>
+            }
+          </button>
+          <br>
+          <a routerLink="/register" style="color:green"> <span>Pas de compte ? </span>
+          <span>Inscrivez-vous ici</span>
+        </a>
+        </div>
+      </form>
+      @if(flowStatus == 'error') {
+        <ngb-alert [dismissible]="false" type="danger" class="d-flex align-items-center justify-content-center mt-3">
+          <fa-icon class="me-2" icon="circle-xmark" size="2x"></fa-icon>
+          <div>
+            @if(flowStatus ==  'error') {
+              Something is wrong wit authentication
+            }
+           
+          </div>
+        </ngb-alert>
+      }
+    </div>
+  
+  </div>
+

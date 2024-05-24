@@ -1,0 +1,1 @@
+export type FlowStatus = 'init' | 'success' | 'error';
