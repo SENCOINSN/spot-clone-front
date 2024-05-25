@@ -14,12 +14,17 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       const accessTokenExpired = authService.tokenExpired(token);
       if(accessTokenExpired){
          authService.logout()
-        return next(authReq);
+         authService.openOrCloseAuthPopup("OPEN")
+         return next(authReq);
       }
       authReq = req.clone({
         setHeaders: { Authorization: `Bearer ${token}` }
       })
     }
+
+    // if(token===null){
+    //     authService.openOrCloseAuthPopup("OPEN");
+    // }
     return next(authReq);
 
     

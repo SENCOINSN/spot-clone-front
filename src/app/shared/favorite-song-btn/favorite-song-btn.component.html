@@ -1,0 +1,12 @@
+@if (authService.isAuthenticated()) {
+    <div (click)="onFavorite(song())">
+       
+      @if(song().favorite) {
+      <i style="color: green;" class="fa-solid fa-heart"></i>
+      remove
+      } @else {
+      <i  style="color:green" class="fa-thin fa-heart"></i>
+       Add
+      }
+    </div>
+  }

@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-auth-popup',
@@ -10,14 +11,18 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class AuthPopupComponent {
   router=inject(Router)
+  authService = inject(AuthService)
 
   login(){
     this.router.navigate(['login'])
+    this.authService.openOrCloseAuthPopup("CLOSE")
+
 
   }
 
   register(){
     this.router.navigate(['register'])
+    this.authService.openOrCloseAuthPopup("CLOSE")
   }
 
 }
